@@ -10,6 +10,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import axios from 'axios'
+
 import {
     useMetamask,
     useAddress,
@@ -76,16 +78,18 @@ export default function Header()
         const wei = parseInt(balance, 16)
         const eth = (wei / Math.pow(10, 18))
 
-        // const url = 'http://192.168.0.145:9000/api/v1/user/token/'+accounts[0]
+        const url = 'http://localhost:9000/api/v1/user/token/'+accounts[0]
 
-        // const response = await axios.get(
-        //     url
-        // ).catch((error) =>
-        // {
-        //     console.log(error)
-        // })
+        const response = await axios.get(
+            url
+        ).catch((error) =>
+        {
+            console.log(error)
+        })
 
-        // setUniqueName(response.data.data.uniqueName)
+        console.log(response)
+
+        setUniqueName(response.data.data.uniqueName)
 
         setBalance(eth)
         setToken(accounts)
@@ -103,27 +107,27 @@ export default function Header()
     )
 
     // Шинэ хэрэглэгч нэвтрэхэд шинээр хадгална
-    // useEffect(async () =>
-    // {
-    //     if (!token) return
+    useEffect(async () =>
+    {
+        if (!token) return
 
-    //     const data = { metaMaskToken: token[0] }
+        const data = { metaMaskToken: token[0] }
 
-    //     const response = await axios.post(
-    //         'http://192.168.0.145:9000/api/v1/user',
-    //         data
-    //     ).catch((error) =>
-    //     {
-    //         console.log(error)
-    //     })
+        const response = await axios.post(
+            'http://localhost:9000/api/v1/user',
+            data
+        ).catch((error) =>
+        {
+            console.log(error)
+        })
 
-    //     // Хэрэглэгч өөрйин мэдээллээ нэмэх хуудас руу үсрэнэ
-    //     if (response?.data.info.name === 'INF_014')
-    //     {
-    //         router.push('/profile/create')
-    //     }
+        // Хэрэглэгч өөрйин мэдээллээ нэмэх хуудас руу үсрэнэ
+        if (response?.data.info.name === 'INF_014')
+        {
+            router.push('/profile/create')
+        }
 
-    // }, [token])
+    }, [token])
 
     // Navbar-ын утгууд
     const data = useMemo(
