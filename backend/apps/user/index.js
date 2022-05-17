@@ -89,8 +89,6 @@ exports.getUserDataByToken = async (req, res) =>
 {
     token = req.params.token
 
-    console.log(token)
-
     const data = await ProfileModel.findOne({ metaMaskToken: token })
 
     req.sendData(data)

@@ -6,7 +6,8 @@ module.exports = {
         domains:
         [
             'avatarfiles.alphacoders.com',
-            'wallpaperaccess.com'
+            'wallpaperaccess.com',
+            'localhost'
         ]
     }
 }

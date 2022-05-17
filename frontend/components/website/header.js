@@ -41,7 +41,7 @@ const titles =
         url: '/marketplace'
     },
     {
-        name: 'Бидний тухай',
+        name: 'Тухай',
         url: '/about'
     },
     {
@@ -74,6 +74,8 @@ export default function Header()
             method: "eth_requestAccounts",
         })
 
+        setToken(accounts)
+
         const balance = await window.ethereum.request({ method: 'eth_getBalance', params: [ accounts[0], 'latest' ] })
         const wei = parseInt(balance, 16)
         const eth = (wei / Math.pow(10, 18))
@@ -87,12 +89,9 @@ export default function Header()
             console.log(error)
         })
 
-        console.log(response)
-
         setUniqueName(response.data.data.uniqueName)
 
         setBalance(eth)
-        setToken(accounts)
     }
 
     useEffect(
@@ -197,7 +196,7 @@ export default function Header()
                                 <div className="py-3 px-3">
 
                                     <Menu>
-                                        <Link href='/blog'>
+                                        <Link href={'/profile/'+uniqueName}>
                                             <a
                                             className={
                                                 classNames('flex items-center hover:bg-gray-100 hover:rounded-lg px-4 py-3 text-sm',
@@ -228,7 +227,7 @@ export default function Header()
 
                                     <Menu>
                                     {({ active }) => (
-                                        <Link href="/" >
+                                        <Link href="/profile/create" >
                                             <a className={
                                                 classNames('flex items-center hover:bg-gray-100 hover:rounded-lg',
                                                 active ? 'bg-gray-100 text-gray-900 rounded-lg' : 'text-gray-700',
@@ -240,7 +239,7 @@ export default function Header()
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
                                                 </p>
-                                                <p className='ml-3 text-gray-800 font-medium'>Settings</p>
+                                                <p className='ml-3 text-gray-800 font-medium'>Тохиргоо</p>
                                                 <p className='ml-auto text-gray-400'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -253,7 +252,7 @@ export default function Header()
 
                                     <Menu>
                                     {({ active }) => (
-                                        <Link href="/">
+                                        <Link href="/privace">
                                             <a
                                             className={
                                                 classNames('flex items-center hover:bg-gray-100 hover:rounded-lg',
@@ -264,10 +263,37 @@ export default function Header()
 
                                                 <p className='ml-2'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                                 </svg>
                                                 </p>
-                                                <p className='ml-3 text-gray-800 font-medium'>Тусламж</p>
+                                                <p className='ml-3 text-gray-800 font-medium'>Нууцлалын бодлого</p>
+                                                <p className='ml-auto text-gray-400'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </p>
+                                            </a>
+                                        </Link>
+                                    )}
+                                    </Menu>
+
+                                    <Menu>
+                                    {({ active }) => (
+                                        <Link href="/terms">
+                                            <a
+                                            className={
+                                                classNames('flex items-center hover:bg-gray-100 hover:rounded-lg',
+                                                active ? 'bg-gray-100 text-gray-900 rounded-lg' : 'text-gray-700',
+                                                'block px-4 py-3 text-sm'
+                                            )}
+                                            >
+
+                                                <p className='ml-2'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                    </svg>
+                                                </p>
+                                                <p className='ml-3 text-gray-800 font-medium'>Үйлчилгээний нөхцөл</p>
                                                 <p className='ml-auto text-gray-400'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -327,65 +353,65 @@ export default function Header()
                     <Transition.Root show={open} as={Fragment}>
                         <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
                             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0"
-                                enterTo="opacity-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
-                            >
-                                <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                            </Transition.Child>
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0"
+                                    enterTo="opacity-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100"
+                                    leaveTo="opacity-0"
+                                >
+                                    <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                                </Transition.Child>
 
-                            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-                                &#8203;
-                            </span>
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                            >
-                                <div className="relative inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div className="sm:flex sm:items-start">
-                                            <div className="mt-3 text-center sm:mt-0 sm:ml-0 sm:text-left">
-                                                <Dialog.Title as="h3" className="text-3xl text-center leading-6 font-medium text-gray-900 mt-10">
-                                                    Түрийвчээ сонгоно уу
-                                                </Dialog.Title>
-                                                <div className="mt-2">
-                                                    <p className="text-lg text-gray-800 text-center mt-8 px-10 font-normal">
-                                                        Түрийвчээ холбосноор та манай
-                                                        <Link href='/terms'><a className='text-gray-500 font-medium hover:text-black'> Үйлчилгээний нөхцөл</a>
-                                                        </Link> болон <Link href='/terms'><a className='text-gray-500 font-medium hover:text-black'>Нууцлалын бодлого</a></Link> -ыг зөвшөөрч байна.
-                                                    </p>
-                                                    <div className='text-center mt-10 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer' onClick={connectMetaMask}>
-                                                        <Image src={metamask} alt="metamask" width={350} height={75} />
-                                                    </div>
-                                                    <div className='text-center mt-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer'>
-                                                        <Image src={walletconnect} alt="walletconnect" width={350} height={75} />
-                                                    </div>
-                                                    <p className='text-center text-lg font-normal mt-4'>
-                                                        Анх удаа Ethereum ашиглаж байна уу?
-                                                    </p>
-                                                    <div className='text-center text-sm text-gray-500 mt-1 mb-8 hover:text-black tracking-wider'>
-                                                        <Link href='/' >
-                                                            <a className='font-verdana'>
-                                                                Түрийвчийн тухай дэлгэрэнгүй
-                                                            </a>
-                                                        </Link>
+                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                                    &#8203;
+                                </span>
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                    enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                >
+                                    <div className="relative inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                            <div className="sm:flex sm:items-start">
+                                                <div className="mt-3 text-center sm:mt-0 sm:ml-0 sm:text-left">
+                                                    <Dialog.Title as="h3" className="text-3xl text-center leading-6 font-medium text-gray-900 mt-10">
+                                                        Түрийвчээ сонгоно уу
+                                                    </Dialog.Title>
+                                                    <div className="mt-2">
+                                                        <p className="text-lg text-gray-800 text-center mt-8 px-10 font-normal">
+                                                            Түрийвчээ холбосноор та манай
+                                                            <Link href='/terms'><a className='text-gray-500 font-medium hover:text-black'> Үйлчилгээний нөхцөл</a>
+                                                            </Link> болон <Link href='/terms'><a className='text-gray-500 font-medium hover:text-black'>Нууцлалын бодлого</a></Link> -ыг зөвшөөрч байна.
+                                                        </p>
+                                                        <div className='text-center mt-10 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer' onClick={connectMetaMask}>
+                                                            <Image src={metamask} alt="metamask" width={350} height={75} />
+                                                        </div>
+                                                        <div className='text-center mt-0 transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer'>
+                                                            <Image src={walletconnect} alt="walletconnect" width={350} height={75} />
+                                                        </div>
+                                                        <p className='text-center text-lg font-normal mt-4'>
+                                                            Анх удаа Ethereum ашиглаж байна уу?
+                                                        </p>
+                                                        <div className='text-center text-sm text-gray-500 mt-1 mb-8 hover:text-black tracking-wider'>
+                                                            <Link href='/' >
+                                                                <a className='font-verdana'>
+                                                                    Түрийвчийн тухай дэлгэрэнгүй
+                                                                </a>
+                                                            </Link>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Transition.Child>
+                                </Transition.Child>
                             </div>
                         </Dialog>
                     </Transition.Root>
