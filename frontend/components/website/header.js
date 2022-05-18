@@ -74,13 +74,13 @@ export default function Header()
             method: "eth_requestAccounts",
         })
 
-        setToken(accounts)
+        setToken(address)
 
         const balance = await window.ethereum.request({ method: 'eth_getBalance', params: [ accounts[0], 'latest' ] })
         const wei = parseInt(balance, 16)
         const eth = (wei / Math.pow(10, 18))
 
-        const url = 'http://localhost:9000/api/v1/user/token/'+accounts[0]
+        const url = 'http://localhost:9000/api/v1/user/token/'+address
 
         const response = await axios.get(
             url
@@ -110,7 +110,7 @@ export default function Header()
     {
         if (!token) return
 
-        const data = { metaMaskToken: token[0] }
+        const data = { metaMaskToken: token }
 
         const response = await axios.post(
             'http://localhost:9000/api/v1/user',

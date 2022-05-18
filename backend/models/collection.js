@@ -1,6 +1,8 @@
 
 var mongoose = require('mongoose')
 
+const Profile = require('./profile')
+
 const CollectionSchema = new mongoose.Schema(
 {
 
@@ -8,6 +10,11 @@ const CollectionSchema = new mongoose.Schema(
     {
         type: String,
         required: false,
+    },
+    profile:
+    {
+        type: mongoose.Types.ObjectId,
+        ref: Profile
     },
     username:
     {
@@ -52,7 +59,22 @@ const CollectionSchema = new mongoose.Schema(
         required: false,
         default: 0
     },
-    bio:
+    description:
+    {
+        type: String,
+        required: false
+    },
+    symbol:
+    {
+        type: String,
+        required: false
+    },
+    external_link:
+    {
+        type: String,
+        required: false
+    },
+    contract_address:
     {
         type: String,
         required: false
