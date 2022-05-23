@@ -33,7 +33,7 @@ export default function nftid()
         if(!uniqueCode) return;
         if(!token) return;
 
-        const endpoint = 'http://192.168.0.145:9000/api/v1/nft/' + uniqueCode + '/' + token
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft/` + uniqueCode + '/' + token
 		const response = await axios.get(
 			endpoint
 		)
@@ -67,7 +67,7 @@ export default function nftid()
         await marketplace.buyoutListing(listings[index]?.id, 1);
         alert('ta avlaa')
 
-        const endpoint = 'http://192.168.0.145:9000/api/v1/nft/profile/' + uniqueCode + '/' + token
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft/profile/` + uniqueCode + '/' + token
         var formData = {
             'adress': address
         }
@@ -88,7 +88,7 @@ export default function nftid()
     return (
         <>
             <div className='relative h-156 bg-[#F2F2F2]'>
-                <img className='h-138 block ml-auto mr-auto pt-16' src={'http://192.168.0.145:9000/' + data?.image} />
+                <img className='h-138 block ml-auto mr-auto pt-16' src={`http://${process.env.DOMAIN_NAME}:9000/` + data?.image} />
             </div>
 
             <div className='flex flex-row flex-wrap container mx-auto pb-32'>
@@ -102,7 +102,7 @@ export default function nftid()
                         <div className=''>
                             <Link href={'/profile/'+data?.owned.uniqueName}>
                                 <button className='rounded-full flex flex-row justify-center shadow-xl transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer'>
-                                    <img className='w-8 h-8 rounded-full object-cover mx-3 my-2' src={'http://192.168.0.145:9000/' + data?.owned.profileImage} />
+                                    <img className='w-8 h-8 rounded-full object-cover mx-3 my-2' src={`http://${process.env.DOMAIN_NAME}:9000/` + data?.owned.profileImage} />
                                     <p className='ml-1 pr-4 mt-3'>@{data?.owned.uniqueName}</p>
                                 </button>
                             </Link>
@@ -115,7 +115,7 @@ export default function nftid()
                         <div className=''>
                             <Link href={'/collection/'+data?.by_collection.contract_address}>
                                 <button className='rounded-full flex flex-row justify-center shadow-xl transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:cursor-pointer'>
-                                    <img className='w-8 h-8 rounded-full object-cover mx-3 my-2' src={'http://192.168.0.145:9000/' + data?.by_collection.logo} />
+                                    <img className='w-8 h-8 rounded-full object-cover mx-3 my-2' src={`http://${process.env.DOMAIN_NAME}:9000/` + data?.by_collection.logo} />
                                     <p className='ml-1 pr-4 mt-3'>{data?.by_collection.username}</p>
                                 </button>
                             </Link>

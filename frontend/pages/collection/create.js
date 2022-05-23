@@ -85,7 +85,7 @@ export default function CreateCollection()
         formData.append('contract_address', collection)
 
         // API endpoint where we send form data.
-        const endpoint = 'http://192.168.0.145:9000/api/v1/collection'
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/collection`
 
         const response = await axios.post(
             endpoint,
@@ -101,7 +101,7 @@ export default function CreateCollection()
 
     const getData = async () =>
     {
-        const endpoint = 'http://192.168.0.145:9000/api/v1/user/token/' + address
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user/token/` + address
 
         const response = await axios.get(
             endpoint

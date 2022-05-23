@@ -56,7 +56,7 @@ export default function Profile()
 
 		if(!uniquename) return;
 
-		const endpoint = 'http://192.168.0.145:9000/api/v1/user/' + uniquename
+		const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user/` + uniquename
 
 		const response = await axios.get(
 			endpoint
@@ -101,12 +101,12 @@ export default function Profile()
         <>
             <div className='h-128 relative'>
                 <div>
-                    <Image className='object-cover' src={profileData?.backgroundImage ? "http://192.168.0.145:9000/" + profileData?.backgroundImage : backgournd} layout='fill' unoptimized={true} />
+                    <Image className='object-cover' src={profileData?.backgroundImage ? `http://${process.env.DOMAIN_NAME}:9000/` + profileData?.backgroundImage : backgournd} layout='fill' unoptimized={true} />
                 </div>
             </div>
             <div className='relative bg-white h-screen'>
                 <div className='h-40 w-40 absolute -mt-28 ml-32 rounded-full border-8 border-white'>
-                    <Image src={profileData?.profileImage ? "http://192.168.0.145:9000/" + profileData?.profileImage : logo} className='rounded-full object-cover' layout='fill'  unoptimized={true} />
+                    <Image src={profileData?.profileImage ? `http://${process.env.DOMAIN_NAME}:9000/` + profileData?.profileImage : logo} className='rounded-full object-cover' layout='fill'  unoptimized={true} />
                 </div>
                 <div className='container mx-auto px-12 flex flex-row'>
                     <div className='basis-1/4 mt-24'>

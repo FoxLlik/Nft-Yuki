@@ -18,7 +18,7 @@ export default function NftCard({
             <Link href={'/nft/' + contract_address + '/' + token}>
                 <a>
                     <div className="border border-gray-200 rounded-xl mb-10 bg-black">
-                        <img className="object-cover w-full h-80 rounded-t-xl transit duration-300 hover:opacity-70" src={'http://192.168.0.145:9000/' + image} />
+                        <img className="object-cover w-full h-80 rounded-t-xl transit duration-300 hover:opacity-70" src={`http://${process.env.DOMAIN_NAME}:9000/` + image} />
 
                         <p className="text-white w-full text-center my-4 text-xl">{name}</p>
 

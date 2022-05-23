@@ -8,7 +8,10 @@ module.exports = {
             'avatarfiles.alphacoders.com',
             'wallpaperaccess.com',
             'localhost',
-            '192.168.0.145'
+            'process.env.DOMAIN_NAME'
         ]
+    },
+    env: {
+        DOMAIN_NAME: process.env.DOMAIN_NAME
     }
 }

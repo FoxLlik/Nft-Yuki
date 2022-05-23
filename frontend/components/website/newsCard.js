@@ -17,7 +17,7 @@ export default function NewsCard({
                 <a>
                     <div className={"w-full border-2 border-black hover:shadow-2xl hover:transition-shadow"
                 + "transition ease-in-out duration-150 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none"}>
-                        <img src={'http://192.168.0.145:9000/'+image} className="border-b-2 border-black object-cover w-full h-80" />
+                        <img src={`http://${process.env.DOMAIN_NAME}:9000/`+image} className="border-b-2 border-black object-cover w-full h-80" />
 
                         <div className="p-8 h-72 relative">
                             {/* Title */}

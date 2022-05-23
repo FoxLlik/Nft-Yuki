@@ -65,6 +65,8 @@ export default function Header()
 
     const cancelButtonRef = useRef(null)
 
+    console.log('process.env.DOMAIN_NAME', process.env.DOMAIN_NAME)
+
 
     // Нэютэрсэн хэрэглэгчийн token avah
     const getMetaToken = async () =>
@@ -77,7 +79,7 @@ export default function Header()
         const wei = parseInt(balance, 16)
         const eth = (wei / Math.pow(10, 18))
 
-        const url = 'http://192.168.0.145:9000/api/v1/user/token/'+address
+        const url = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user/token/`+address
 
         const response = await axios.get(
             url
@@ -100,7 +102,7 @@ export default function Header()
             const data = { metaMaskToken: address }
 
             const response = await axios.post(
-                'http://192.168.0.145:9000/api/v1/user',
+                `http://${process.env.DOMAIN_NAME}:9000/api/v1/user`,
                 data
             ).catch((error) =>
             {

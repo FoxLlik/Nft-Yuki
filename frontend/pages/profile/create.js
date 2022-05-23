@@ -74,7 +74,7 @@ export default function CreateProfile()
     {
         const uniqueName = event.target.value
 
-        const endpoint = 'http://192.168.0.145:9000/api/v1/user/' + uniqueName
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user/` + uniqueName
 
         const data = {
 
@@ -124,7 +124,7 @@ export default function CreateProfile()
         formData.append('metaMaskToken', token)
 
         // API endpoint where we send form data.
-        const endpoint = 'http://192.168.0.145:9000/api/v1/user'
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user`
 
         const response = await axios.put(
             endpoint,
@@ -140,7 +140,7 @@ export default function CreateProfile()
 
     const getData = async () =>
     {
-        const endpoint = 'http://192.168.0.145:9000/api/v1/user/token/' + token
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user/token/` + token
 
         const response = await axios.get(
             endpoint
@@ -240,7 +240,7 @@ export default function CreateProfile()
                                                         <img src={proimage} alt="preview image" />
                                                     </>
                                                     :
-                                                    <><img src={"http://192.168.0.145:9000/" + profileData?.profileImage} alt="preview image" /></>
+                                                    <><img src={`http://${process.env.DOMAIN_NAME}:9000/` + profileData?.profileImage} alt="preview image" /></>
                                                 :
                                                 proimage
                                                 ?
@@ -312,7 +312,7 @@ export default function CreateProfile()
                                                 <img src={backimage} alt="preview image" />
                                             </>
                                             :
-                                            <><img src={"http://192.168.0.145:9000/" + profileData?.backgroundImage} alt="preview image" /></>
+                                            <><img src={`http://${process.env.DOMAIN_NAME}:9000/` + profileData?.backgroundImage} alt="preview image" /></>
                                         :
                                         backimage
                                         ?

@@ -25,7 +25,7 @@ export default function postMarketPlace()
         if(!uniqueCode) return;
         if(!token) return;
 
-        const endpoint = 'http://192.168.0.145:9000/api/v1/nft/' + uniqueCode + '/' + token
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft/` + uniqueCode + '/' + token
 		const response = await axios.get(
 			endpoint
 		)
@@ -60,7 +60,7 @@ export default function postMarketPlace()
         }
 
         // API endpoint where we send form data.
-        const endpoint = 'http://192.168.0.145:9000/api/v1/nft/marketplace/' + uniqueCode + '/' + token
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft/marketplace/` + uniqueCode + '/' + token
 
         const response = await axios.post(
             endpoint,
@@ -109,7 +109,7 @@ export default function postMarketPlace()
                                             data?.image
                                             ?
                                             <>
-                                                <img src={"http://192.168.0.145:9000/" + data?.image} alt="nft image" />
+                                                <img src={`http://${process.env.DOMAIN_NAME}:9000/` + data?.image} alt="nft image" />
                                             </>
                                             :
                                             <></>

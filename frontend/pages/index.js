@@ -16,13 +16,13 @@ const Home = () => {
 
     useEffect(async () =>
     {
-        const profileUrl = 'http://192.168.0.145:9000/api/v1/user'
+        const profileUrl = `http://${process.env.DOMAIN_NAME}:9000/api/v1/user`
         const profileResponse = await axios.get(
             profileUrl
         )
         setProfiles(profileResponse.data.data)
 
-        const collectionUrl = 'http://192.168.0.145:9000/api/v1/collection'
+        const collectionUrl = `http://${process.env.DOMAIN_NAME}:9000/api/v1/collection`
         const collectionResponse = await axios.get(
             collectionUrl
         )

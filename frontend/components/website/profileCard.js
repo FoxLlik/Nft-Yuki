@@ -8,10 +8,10 @@ export default function ProfileCard({ backgroundImage='', profileImage='', follo
             <Link href={'/profile/'+uniqueName}>
                 <a className='rounded relative'>
                     <div className='h-48'>
-                        <img className='w-full h-full rounded-t-2xl object-cover' src={'http://192.168.0.145:9000/' + backgroundImage} />
+                        <img className='w-full h-full rounded-t-2xl object-cover' src={`http://${process.env.DOMAIN_NAME}:9000/` + backgroundImage} />
                     </div>
                     <div className='relative p-6 bg-white'>
-                        <img className='w-24 h-24 rounded-full border-8 border-white absolute left-10 -top-12 object-cover' src={'http://192.168.0.145:9000/' + profileImage} />
+                        <img className='w-24 h-24 rounded-full border-8 border-white absolute left-10 -top-12 object-cover' src={`http://${process.env.DOMAIN_NAME}:9000/` + profileImage} />
                         <p className='text-3xl mt-10 font-semibold'>{username}</p>
                         <p className='mt-1 font-semibold text-xl text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-pink-700 to-blue-600'>@{uniqueName}</p>
                     </div>

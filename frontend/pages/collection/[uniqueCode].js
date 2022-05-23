@@ -40,13 +40,13 @@ export default function CollectionById()
 
         if(!uniqueCode) return;
 
-		const endpoint = 'http://192.168.0.145:9000/api/v1/collection/' + uniqueCode
+		const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/collection/` + uniqueCode
 		const response = await axios.get(
 			endpoint
 		)
         setCollection(response.data.data)
 
-        const nftendpoint = 'http://192.168.0.145:9000/api/v1/nft/collec/' + uniqueCode
+        const nftendpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft/collec/` + uniqueCode
 
 		const nftResponse = await axios.get(
 			nftendpoint
@@ -73,11 +73,11 @@ export default function CollectionById()
         <>
             <div className='h-156 relative'>
                 <div>
-                    <Image className='object-cover' src={collection?.backgroundImage ? "http://192.168.0.145:9000/" + collection?.backgroundImage : backgournd} layout='fill' unoptimized={true} />
+                    <Image className='object-cover' src={collection?.backgroundImage ? `http://${process.env.DOMAIN_NAME}:9000/` + collection?.backgroundImage : backgournd} layout='fill' unoptimized={true} />
                 </div>
                 <div className='flex flex-col absolute -bottom-14 left-44'>
                     <div className='bg-gray-200 rounded-xl bg-opacity-40 p-2 h-40 w-40 mb-32'>
-                        <Image className='object-cover rounded-xl' src={collection?.logo ? "http://192.168.0.145:9000/" + collection?.logo : logo} width={145} height={145} unoptimized={true} />
+                        <Image className='object-cover rounded-xl' src={collection?.logo ? `http://${process.env.DOMAIN_NAME}:9000/` + collection?.logo : logo} width={145} height={145} unoptimized={true} />
                     </div>
                     <a target="_blank" href="https://www.google.com/" className={'p-2 px-4 mb-10 w-fit tracking-widest right-auto transition bg-black text-white rounded-full bg-opacity-80 hover:bg-white hover:text-black ease-in-out duration-150 hover:-translate-y-1 flex flex-row'}>
                         {collection?.username}&nbsp;

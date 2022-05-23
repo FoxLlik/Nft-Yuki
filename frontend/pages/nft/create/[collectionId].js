@@ -60,7 +60,7 @@ export default function CreateNft()
 
 
         // API endpoint where we send form data.
-        const endpoint = 'http://192.168.0.145:9000/api/v1/nft'
+        const endpoint = `http://${process.env.DOMAIN_NAME}:9000/api/v1/nft`
 
         formData.append('name', event.target.name.value)
         formData.append('description', event.target.description.value)
