@@ -16,7 +16,7 @@ export default function Blog()
     async () =>
     {
 
-        const url = 'http://localhost:9000/api/v1/news/'
+        const url = 'http://192.168.0.145:9000/api/v1/news/'
 
         const response = await axios.get(
             url

@@ -7,7 +7,8 @@ module.exports = {
         [
             'avatarfiles.alphacoders.com',
             'wallpaperaccess.com',
-            'localhost'
+            'localhost',
+            '192.168.0.145'
         ]
     }
 }

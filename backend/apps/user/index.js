@@ -19,6 +19,8 @@ exports.post = async (req, res) =>
     /** Нэвтэрсэн хэрэглэгчийн мэдээллийг баазаас хайна */
     profile = await ProfileModel.find({ metaMaskToken: metaMaskToken })
 
+    console.log(profile)
+
     /** Байхгүй бол шинээр үүсгэнэ */
     if (profile.length !== 0)
     {
@@ -70,7 +72,7 @@ exports.putProfile = async (req, res) =>
 
 exports.get = async (req, res) =>
 {
-    const profiles = await ProfileModel.find().sort('-date').limit(10)
+    const profiles = await ProfileModel.find().sort('-date').limit(8)
 
     req.sendData(profiles)
 }

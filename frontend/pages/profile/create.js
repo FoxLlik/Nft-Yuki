@@ -38,10 +38,10 @@ export default function CreateProfile()
     // Нэютэрсэн хэрэглэгчийн token avah
     const getMetaToken = async () =>
     {
-        const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts",
-        })
-        setToken(accounts)
+        // const accounts = await window.ethereum.request({
+        //     method: "eth_requestAccounts",
+        // })
+        setToken(address)
     }
 
     useEffect( () =>

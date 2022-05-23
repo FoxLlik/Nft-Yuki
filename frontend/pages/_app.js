@@ -1,14 +1,16 @@
 
-import { ThirdwebProvider, ChainId } from '@thirdweb-dev/react'
+import { ThirdwebProvider } from '@thirdweb-dev/react'
 
 import Header from '../components/website/header'
 
 import '../styles/globals.css'
 
+const chainId = 4;
+
 function MyApp({ Component, pageProps })
 {
     return (
-        <ThirdwebProvider desiredChainId={ChainId.Mainnet} >
+        <ThirdwebProvider desiredChainId={chainId} >
             <Header />
             <Component {...pageProps} />
         </ThirdwebProvider>

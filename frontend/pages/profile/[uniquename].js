@@ -42,6 +42,15 @@ export default function Profile()
 	const [profileData, setProfileData] = useState([])
     const [myProfile, setMyProfile] = useState(false)
 
+    // huudas joohon dooroos ehluuleh
+    useEffect(
+        () =>
+        {
+            window.scrollTo(0, 120)
+        },
+        []
+    )
+
 	useEffect(async () =>
 	{
 
