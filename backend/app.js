@@ -44,6 +44,7 @@ app.use(successFn)
 app.use("/api/v1/user", require("./routes/user"));
 app.use("/api/v1/news", require("./routes/news"));
 app.use("/api/v1/collection", require("./routes/collection"));
+app.use("/api/v1/nft", require("./routes/nft"));
 
 app.use(errorHandler)
 app.use('/public', express.static('../backend/public/'));

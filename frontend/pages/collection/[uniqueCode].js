@@ -7,6 +7,10 @@ import Link from 'next/link'
 
 import axios from 'axios'
 
+import { useAddress } from '@thirdweb-dev/react'
+
+import NftCard from '../../components/website/nftCard'
+
 import backgournd from '../../assets/logo/5418410.jpg'
 import logo from '../../assets/logo/5418410.gif'
 
@@ -16,7 +20,11 @@ export default function CollectionById()
     const router = useRouter()
     const { uniqueCode } = router.query
 
+    const address = useAddress()
+
     const [collection, setCollection] = useState({})
+    const [nfts, setNfts] = useState([])
+    const [myCollection, setMyCollection] = useState(false)
 
     // huudas joohon dooroos ehluuleh
     useEffect(
@@ -32,19 +40,34 @@ export default function CollectionById()
 
         if(!uniqueCode) return;
 
-        console.log(uniqueCode)
-
 		const endpoint = 'http://192.168.0.145:9000/api/v1/collection/' + uniqueCode
-
 		const response = await axios.get(
 			endpoint
 		)
+        setCollection(response.data.data)
 
-		setCollection(response.data.data)
+        const nftendpoint = 'http://192.168.0.145:9000/api/v1/nft/collec/' + uniqueCode
+
+		const nftResponse = await axios.get(
+			nftendpoint
+		)
+
+		setNfts(nftResponse.data.data)
 
 	}, [uniqueCode])
 
-    console.log(collection)
+    useEffect(async () =>
+    {
+        if(!address) return;
+        if(!collection.metaMaskToken) return;
+
+        if (collection.metaMaskToken === address)
+        {
+            setMyCollection(true)
+        }
+    }, [address, collection])
+
+    console.log('collection', collection)
 
     return (
         <>
@@ -72,8 +95,48 @@ export default function CollectionById()
                         </button>
                     </Link>
                     <div className='px-12 py-10 w-fit bg-white shadow-xl rounded-lg text-xl font-medium '>
-                        NFTs &nbsp;<span className='text-gray-400 text-sm'>(123)</span>
+                        NFTs &nbsp;<span className='text-gray-400 text-sm'>({collection?.nftCount})</span>
+                        {
+                            myCollection
+                            ?
+                            <Link href={'/nft/create/'+uniqueCode}>
+                                <button className='rounded-full bg-black text-white text-sm px-5 py-3 ml-10 transition border duration-150 hover:text-black hover:bg-white hover:shadow-2xl hover:border'>
+                                    NFT шинээр үүсгэх
+                                </button>
+                            </Link>
+                            :
+                            <></>
+                        }
                     </div>
+                </div>
+            </div>
+
+            <div className='container mx-auto mt-32'>
+                <div className='flex flex-row flex-wrap'>
+
+                    {
+                        nfts.map((nft) =>
+                        {
+                            return (
+                                <div className='basis-1/4 px-5' key={nft?._id}>
+                                    <NftCard
+                                        token={nft?.tokenId}
+                                        price={nft?.price}
+                                        uniqueName={nft?.owned?.uniqueName}
+                                        name={nft?.name}
+                                        marketPlace={nft?.marketPlace}
+                                        image={nft?.image}
+                                        metaMaskToken={nft?.by_collection?.metaMaskToken}
+                                        username={nft?.by_collection?.username}
+                                        contract_address={collection?.contract_address}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+
+
+
                 </div>
             </div>
         </>

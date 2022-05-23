@@ -60,7 +60,6 @@ export default function Header()
     const router = useRouter()
 
     const [open, setOpen] = useState(false)
-    const [token, setToken] = useState()
     const [balance, setBalance] = useState(0)
     const [uniqueName, setUniqueName] = useState('')
 
@@ -74,13 +73,11 @@ export default function Header()
             method: "eth_requestAccounts",
         })
 
-        setToken(address)
-
         const balance = await window.ethereum.request({ method: 'eth_getBalance', params: [ accounts[0], 'latest' ] })
         const wei = parseInt(balance, 16)
         const eth = (wei / Math.pow(10, 18))
 
-        const url = 'http://localhost:9000/api/v1/user/token/'+address
+        const url = 'http://192.168.0.145:9000/api/v1/user/token/'+address
 
         const response = await axios.get(
             url
@@ -89,15 +86,32 @@ export default function Header()
             console.log(error)
         })
 
-        setUniqueName(response.data.data.uniqueName)
+        console.log(response)
 
+        setUniqueName(response.data.data.uniqueName)
         setBalance(eth)
     }
 
     useEffect(
-        () =>
+        async () =>
         {
             if (!address) return
+
+            const data = { metaMaskToken: address }
+
+            const response = await axios.post(
+                'http://192.168.0.145:9000/api/v1/user',
+                data
+            ).catch((error) =>
+            {
+                console.log(error)
+            })
+
+            // Хэрэглэгч өөрйин мэдээллээ нэмэх хуудас руу үсрэнэ
+            if (response?.data.info.name === 'INF_014')
+            {
+                router.push('/profile/create')
+            }
 
             setOpen(false)
             getMetaToken()
@@ -105,28 +119,6 @@ export default function Header()
         [address]
     )
 
-    // Шинэ хэрэглэгч нэвтрэхэд шинээр хадгална
-    useEffect(async () =>
-    {
-        if (!token) return
-
-        const data = { metaMaskToken: token }
-
-        const response = await axios.post(
-            'http://localhost:9000/api/v1/user',
-            data
-        ).catch((error) =>
-        {
-            console.log(error)
-        })
-
-        // Хэрэглэгч өөрйин мэдээллээ нэмэх хуудас руу үсрэнэ
-        if (response?.data.info.name === 'INF_014')
-        {
-            router.push('/profile/create')
-        }
-
-    }, [token])
 
     // Navbar-ын утгууд
     const data = useMemo(
@@ -309,7 +301,7 @@ export default function Header()
                                         <button
                                             onClick={
                                                 () => {
-                                                    disconnectMetaMask(), setToken()
+                                                    disconnectMetaMask()
                                                 }
                                             }
                                             className={

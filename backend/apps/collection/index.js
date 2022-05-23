@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const CError = require('../../utils/rsp')
 
 const CollectionModel = require('../../models/collection')
+const NftModel = require('../../models/nft')
 
 /**
  * medee мэдээлэл нэмэх
@@ -44,9 +45,17 @@ exports.getCollectionId = async (req, res) =>
 {
     const contract = req.params.contract
 
-    const data = await CollectionModel
+    var data = await CollectionModel
         .findOne({ contract_address: contract })
         .populate('profile')
 
+    var count = await NftModel.find({ by_collection: data._id }).count()
+
+    data = { ...data._doc,
+        'nftCount': count
+
+    }
+
     req.sendData(data)
+
 }

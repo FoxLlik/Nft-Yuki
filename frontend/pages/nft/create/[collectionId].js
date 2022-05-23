@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { useRouter } from 'next/router'
 
+import axios from "axios";
+
 import { useNFTCollection, useAddress } from "@thirdweb-dev/react"
 
 
@@ -13,7 +15,8 @@ export default function CreateNft()
     const { collectionId } = router.query
 
     const address = useAddress()
-    const nftCollection = useNFTCollection(collectionId)
+    // const nftCollection = useNFTCollection(collectionId)
+    const nftCollection = useNFTCollection('0x965B95D50b6e8035e3ADc1cc4821C28BE4B97a41')
 
     const [NFTimage, setNFTimage] = useState(null)
 
@@ -29,6 +32,8 @@ export default function CreateNft()
     {
         event.preventDefault()
 
+        var formData = new FormData()
+
         var metadata = {
             name: event.target.name.value,
             description: event.target.description.value || '',
@@ -39,13 +44,41 @@ export default function CreateNft()
         if (event.target.nftImage.files[0])
         {
             metadata.image = event.target.nftImage.files[0]
+            formData.append('image', event.target.nftImage.files[0])
+        }
+        console.log('dsa')
+
+        const tx = await nftCollection.mintTo('0xAa5f8a5e58a84b8aD52861D33ED7E1e59C001587', metadata);
+        const receipt = tx.receipt; // the transaction receipt
+        const tokenId = tx.id; // the id of the NFT minted
+        const nft = await tx.data(); // (optional) fetch details of minted NFT
+
+        console.log('uusej bn')
+        await nftCollection.transfer(walletAddress, tokenId)
+        console.log('uussen')
+
+
+
+        // API endpoint where we send form data.
+        const endpoint = 'http://192.168.0.145:9000/api/v1/nft'
+
+        formData.append('name', event.target.name.value)
+        formData.append('description', event.target.description.value)
+        formData.append('by_collection', collectionId)
+        formData.append('tokenId', tokenId)
+        formData.append('transactionHash', receipt.transactionHash || '')
+        formData.append('ipfs', nft.metadata.uri)
+
+        const response = await axios.post(
+            endpoint,
+            formData
+        )
+
+        if (response.data.info.code === 1)
+        {
+            router.push('/')
         }
 
-        console.log(aa?.bb)
-
-        console.log('uusej bn !!!')
-        await nftCollection.mintTo(walletAddress, metadata);
-        console.log('uussen !!!')
     })
 
     return (

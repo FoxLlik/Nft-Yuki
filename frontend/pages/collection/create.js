@@ -101,7 +101,7 @@ export default function CreateCollection()
 
     const getData = async () =>
     {
-        const endpoint = 'http://localhost:9000/api/v1/user/token/' + address
+        const endpoint = 'http://192.168.0.145:9000/api/v1/user/token/' + address
 
         const response = await axios.get(
             endpoint
