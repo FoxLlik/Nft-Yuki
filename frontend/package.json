@@ -5,7 +5,7 @@
     "build": "next build",
     "start": "next start",
     "start_front": "next start -p 8004",
-    "start_3001": "npm run dev -- -p 3001"
+    "start_8083": "npm run dev -- -p 8083"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.1",
